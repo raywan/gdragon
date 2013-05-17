@@ -127,6 +127,7 @@ class Game(object):
             self.on_event()
             self.on_update()
             self.on_render()
+        #self.on_cleanup()
 
 def main():
     game = Game()
