@@ -25,7 +25,6 @@ class MainMenu(object):
                 sys.exit()
             elif event.type == KEYDOWN:
                 if event.key == K_p:
-                    self.game.game_state.add("play", Play(self.game))
                     self.game.game_state.change("play", None)
     def update(self):
         pygame.display.flip()
@@ -57,7 +56,7 @@ class Play(object):
     def on_exit(self):
         pass
 
-class StateManager(object):
+class StateMachine(object):
     #list of states
     empty_state = EmptyState(None)
     current_state = empty_state
@@ -79,9 +78,29 @@ class StateManager(object):
         #pop a state off the stack
         self.states.pop(state_name)
 
-#Might use later
-class Screen(object):
-    def __init__(self, w, h):
+class StateStack(object):
+    #list of states
+    states = {}
+    def event(self):
+        # self.current_state.event()
+        pass
+    def update(self):
+        #update top stack
+        # self.top_state.update()
+        pass
+    def render(self):
+        #like update, render top stack
+        # self.top_state.render()
+        pass
+    def change(self, state_name, other_args):
+        pass
+    def push(self, state_name, state_class):
+        #pushes a state into the state stack
+        #list_of_states.Push(state)
+        pass
+    def pop(self):
+        #pop a state off the stack
+        #state.Pop()
         pass
 
 class Game(object):
@@ -95,8 +114,9 @@ class Game(object):
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), 0, 32)
         self.clock = pygame.time.Clock()
 
-        self.game_state = StateManager()
+        self.game_state = StateMachine()
         self.game_state.add("main", MainMenu(self))
+        self.game_state.add("play", Play(self))
         self.game_state.change("main", None)
         
     def on_event(self):
