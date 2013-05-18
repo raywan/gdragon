@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
+from sprites import *
 
 #To be interfaced from
 class EmptyState(object):
@@ -32,7 +33,7 @@ class MainMenu(object):
     def render(self):
         self.game.screen.blit(self.main_surf, (0,0))
     def on_enter(self, args):
-        self.main_surf = pygame.Surface((300,200), 0, 32)
+        self.main_surf = pygame.Surface((800,600), 0, 32)
     def on_exit(self):
         pass
 
@@ -51,9 +52,15 @@ class Play(object):
         pygame.display.flip()
     def render(self):
         self.game.screen.blit(self.play_surf, (0,0))
+        self.map_1.render_map()
+        self.player.render()
+
     def on_enter(self, args):
-        self.play_surf = pygame.Surface((300,200), 0, 32)
+        self.play_surf = pygame.Surface((800,600), 0, 32)
         self.play_surf.fill((250,250,250))
+        self.player = Player(self.game, (150,100))
+        self.map_1 = Map(self.game)
+        self.map_1.render_tiles()
     def on_exit(self):
         pass
 
@@ -87,14 +94,16 @@ class Screen(object):
 class Game(object):
     def __init__(self):
         self.running = True
-        self.SCREEN_WIDTH = 300
-        self.SCREEN_HEIGHT = 200
+        self.SCREEN_WIDTH = 800
+        self.SCREEN_HEIGHT = 600
+        self.SCALE = 3
     def on_init(self):
         #set screen and load stuff
         pygame.init()
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), 0, 32)
         self.clock = pygame.time.Clock()
 
+        self.ss = SpriteSheet("test.png")
         self.game_state = StateManager()
         self.game_state.add("main", MainMenu(self))
         self.game_state.change("main", None)
