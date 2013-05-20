@@ -32,12 +32,18 @@ class Player(pygame.sprite.Sprite):
         pass
     def render(self):
         self.game.screen.blit(self.img, self.init_pos)
-        
+class NullTile(pygame.sprite.Sprite):
+    def __init__(self, parent):
+        self.parent = parent
+        pygame.sprite.Sprite.__init__(self)
+        self.spritesheet = SpriteSheet("test.png")
+        self.tile = pygame.image.load((0,0,32,32),(255,0,255))
 class GrassTile(pygame.sprite.Sprite):
     def __init__(self, parent):
         self.parent = parent
         pygame.sprite.Sprite.__init__(self)
         self.spritesheet = SpriteSheet("test.png")
+        #remember to update tile
         self.tile = self.spritesheet.load((0,0,32,32),(255,0,255))
         # self.tile = pygame.transform.scale(self.tile, (32 * self.parent.game.SCALE, 32 *
         #     self.parent.game.SCALE))
