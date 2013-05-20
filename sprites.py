@@ -53,13 +53,17 @@ class Map(object):
             self.tile_array.append(0)
 
     def render_tiles(self):
-        for y in range(self.map_surf.get_size()[1]//32):
-            for x in range(self.map_surf.get_size()[0]//32):
-                #NOTE: THIS ONLY SCANS THE FIRST 10 ELEMENTS IN THE ARRAY
-                #FIXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                if self.tile_array[x] == 0:
-                    self.map_surf.blit(self.grass.tile, (32 * x, 32 * y))
-        #TESTING SCALING
+        tile_column = 1
+        tile_row = 1
+        for i in range(len(self.tile_array)):
+            if self.tile_array[i] == 0:
+                self.map_surf.blit(self.grass.tile, (32*(tile_column - 1), 32*(tile_row - 1)))
+            tile_column += 1
+            if tile_column > (self.map_surf.get_size()[1]//32):
+                tile_column = 1
+                tile_row += 1
+            
+        # TESTING SCALING
         # self.map_surf = pygame.transform.scale(self.map_surf, (self.map_surf.get_size()[0] *
         #     self.game.SCALE, self.map_surf.get_size()[1] * self.game.SCALE))
         
