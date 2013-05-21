@@ -68,6 +68,7 @@ class Map(object):
     def __init__(self, parent):
         self.game = parent
         self.grass = GrassTile(self)
+        self.null = NullTile(self)
         self.map_surf = pygame.Surface((320,320))
         #DEBUG TILE ARRAY
         self.tile_array = [1]
@@ -80,7 +81,10 @@ class Map(object):
         for i in range(len(self.tile_array)):
             if self.tile_array[i] == 0:
                 self.map_surf.blit(self.grass.tile, (32*(tile_column - 1), 32*(tile_row - 1)))
+            else:
+                self.map_surf.blit(self.null.tile, (32*(tile_column - 1), 32*(tile_row - 1)))
             tile_column += 1
+        
             if tile_column > (self.map_surf.get_size()[1]//32):
                 tile_column = 1
                 tile_row += 1
