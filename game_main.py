@@ -31,6 +31,16 @@ class Screen(object):
     def __init__(self, w, h):
         pass
 
+class Camera(object):
+    def __init__(self, lvl_width, lvl_height):
+        self.pos = pygame.Rect(0,0, lvl_width, lvl_height)
+    def apply(self, target):
+        return target.rect.move(self.pos.topleft)
+    def update(self, target):
+        self.pos = self.track(self.pos, target.rect)
+    def track(self):
+        pass
+
 class Game(object):
     def __init__(self):
         self.running = True

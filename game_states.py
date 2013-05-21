@@ -54,9 +54,9 @@ class Play(object):
 
         self.play_surf = pygame.Surface((800,600), 0, 32)
         self.play_surf.fill((250,250,250))
-        self.player = Player(self.game, (150,100))
+        self.player = Player(self.game, (250,250))
         self.map_1 = Map(self.game)
-        self.map_1.render_tiles()
+        self.map_1.render_tiles((0,0))
 
     def event(self):
         for event in pygame.event.get():
@@ -91,7 +91,24 @@ class Play(object):
 
     def update(self):
         self.player.update()
+        
+        #SIMULATES A CAMERA
+        # if self.player.rect.x > 500:
+        #     self.map_1.rect.x -= 2
+        #     self.player.rect.x = 500
+        # elif self.player.rect.x < 140:
+        #     self.map_1.rect.x += 2
+        #     self.player.rect.x = 140
+
+        # elif self.player.rect.y < 140:
+        #     self.map_1.rect.y += 2
+        #     self.player.rect.y = 140
+        # elif self.player.rect.y > 340:
+        #     self.map_1.rect.y -= 2
+        #     self.player.rect.y = 340
+
         pygame.display.flip()
+
     def render(self):
         self.game.screen.blit(self.play_surf, (0,0))
         self.map_1.render_map()

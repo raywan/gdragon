@@ -44,7 +44,6 @@ class Player(pygame.sprite.Sprite):
         self.old_y = self.rect.y
         self.new_y = self.old_y + self.d_y
         self.rect.y = self.new_y
-
     def render(self):
         self.game.screen.blit(self.img, self.rect)
 
@@ -69,13 +68,13 @@ class Map(object):
         self.game = parent
         self.grass = GrassTile(self)
         self.null = NullTile(self)
-        self.map_surf = pygame.Surface((320,320))
+        self.map_surf = pygame.Surface((1024,1024))
         #DEBUG TILE ARRAY
         self.tile_array = [1]
-        for x in range(99):
+        for x in range(1023):
             self.tile_array.append(0)
 
-    def render_tiles(self):
+    def render_tiles(self, map_pos):
         tile_column = 1
         tile_row = 1
         for i in range(len(self.tile_array)):
@@ -88,12 +87,15 @@ class Map(object):
             if tile_column > (self.map_surf.get_size()[1]//32):
                 tile_column = 1
                 tile_row += 1
-            
+                    
+        self.rect = self.map_surf.get_rect()
+        self.rect.x = map_pos[0]
+        self.rect.y = map_pos[1]
         # TESTING SCALING
         # self.map_surf = pygame.transform.scale(self.map_surf, (self.map_surf.get_size()[0] *
         #     self.game.SCALE, self.map_surf.get_size()[1] * self.game.SCALE))
         
     def render_map(self):
-        self.game.screen.blit(self.map_surf, (0,0))
+        self.game.screen.blit(self.map_surf, self.rect)
 
 
