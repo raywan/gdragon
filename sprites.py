@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, parent, init_pos):
         self.game = parent
         pygame.sprite.Sprite.__init__(self)
-        self.spritesheet = SpriteSheet("test.png")
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
         self.img = self.spritesheet.load((32,0,32,32),(255,0,255))
         #TESTING SCALING
         # self.img = pygame.transform.scale(self.img, (32 * self.game.SCALE, 32 * self.game.SCALE))
@@ -52,14 +52,15 @@ class NullTile(pygame.sprite.Sprite):
     def __init__(self, parent):
         self.parent = parent
         pygame.sprite.Sprite.__init__(self)
-        self.spritesheet = SpriteSheet("test.png")
-        self.tile = pygame.image.load((0,0,32,32),(255,0,255))
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
+        self.tile = self.spritesheet.load((0,0,32,32),(255,0,255))
+
 class GrassTile(pygame.sprite.Sprite):
     def __init__(self, parent):
         self.parent = parent
         pygame.sprite.Sprite.__init__(self)
-        self.spritesheet = SpriteSheet("test.png")
-        self.tile = self.spritesheet.load((0,0,32,32),(255,0,255))
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
+        self.tile = self.spritesheet.load((64,0,32,32),(255,0,255))
         # self.tile = pygame.transform.scale(self.tile, (32 * self.parent.game.SCALE, 32 *
         #     self.parent.game.SCALE))
 

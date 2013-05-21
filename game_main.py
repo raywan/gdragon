@@ -42,7 +42,6 @@ class Game(object):
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), 0, 32)
         self.clock = pygame.time.Clock()
 
-        self.ss = SpriteSheet("test.png")
         self.game_state = StateManager()
         self.game_state.add("main", MainMenu(self))
         self.game_state.change("main", None)
@@ -53,7 +52,6 @@ class Game(object):
         self.game_state.update()
     def on_render(self):
         self.game_state.render()
-
     def on_exec(self):
         self.on_init()
 
@@ -62,10 +60,3 @@ class Game(object):
             self.on_event()
             self.on_update()
             self.on_render()
-
-def main():
-    game = Game()
-    game.on_exec()
-
-if __name__ == "__main__":
-    main()
