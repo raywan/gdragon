@@ -20,18 +20,34 @@ class SpriteSheet(object):
         return image
 
 class Player(pygame.sprite.Sprite):
+    d_x = 0
+    d_y = 0
     def __init__(self, parent, init_pos):
         self.game = parent
         pygame.sprite.Sprite.__init__(self)
-        self.init_pos = init_pos
         self.spritesheet = SpriteSheet("test.png")
         self.img = self.spritesheet.load((32,0,32,32),(255,0,255))
         #TESTING SCALING
-        self.img = pygame.transform.scale(self.img, (32 * self.game.SCALE, 32 * self.game.SCALE))
+        # self.img = pygame.transform.scale(self.img, (32 * self.game.SCALE, 32 * self.game.SCALE))
+        #
+        self.rect = self.img.get_rect()
+        self.rect.x = init_pos[0]
+        self.rect.y = init_pos[1]
+    def move(self, x, y):
+        self.d_x += x
+        self.d_y += y
     def update(self):
-        pass
+        self.old_x = self.rect.x
+        self.new_x = self.old_x + self.d_x
+        self.rect.x = self.new_x
+
+        self.old_y = self.rect.y
+        self.new_y = self.old_y + self.d_y
+        self.rect.y = self.new_y
+
     def render(self):
-        self.game.screen.blit(self.img, self.init_pos)
+        self.game.screen.blit(self.img, self.rect)
+
 class NullTile(pygame.sprite.Sprite):
     def __init__(self, parent):
         self.parent = parent
@@ -43,7 +59,6 @@ class GrassTile(pygame.sprite.Sprite):
         self.parent = parent
         pygame.sprite.Sprite.__init__(self)
         self.spritesheet = SpriteSheet("test.png")
-        #remember to update tile
         self.tile = self.spritesheet.load((0,0,32,32),(255,0,255))
         # self.tile = pygame.transform.scale(self.tile, (32 * self.parent.game.SCALE, 32 *
         #     self.parent.game.SCALE))
