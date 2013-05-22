@@ -93,19 +93,19 @@ class Play(object):
         self.player.update()
         
         #SIMULATES A CAMERA
-        # if self.player.rect.x > 500:
-        #     self.map_1.rect.x -= 2
-        #     self.player.rect.x = 500
-        # elif self.player.rect.x < 140:
-        #     self.map_1.rect.x += 2
-        #     self.player.rect.x = 140
+        if self.player.rect.x > 500:
+            self.map_1.rect.x -= 2
+            self.player.rect.x = 500
+        elif self.player.rect.x < 140:
+            self.map_1.rect.x += 2
+            self.player.rect.x = 140
 
-        # elif self.player.rect.y < 140:
-        #     self.map_1.rect.y += 2
-        #     self.player.rect.y = 140
-        # elif self.player.rect.y > 340:
-        #     self.map_1.rect.y -= 2
-        #     self.player.rect.y = 340
+        if self.player.rect.y < 140:
+            self.map_1.rect.y += 2
+            self.player.rect.y = 140
+        elif self.player.rect.y > 340:
+            self.map_1.rect.y -= 2
+            self.player.rect.y = 340
 
         pygame.display.flip()
 
