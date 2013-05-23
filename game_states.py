@@ -1,6 +1,7 @@
 import sys
 import pygame
 from sprites import *
+from level import *
 from pygame.locals import *
 
 #To be interfaced from
@@ -54,9 +55,8 @@ class Play(object):
 
         self.play_surf = pygame.Surface((800,600), 0, 32)
         self.play_surf.fill((250,250,250))
+        self.main_map = MainMap(self.game, 0,0)
         self.player = Player(self.game, (250,250))
-        self.map_1 = Map(self.game)
-        self.map_1.render_tiles((0,0))
 
     def event(self):
         for event in pygame.event.get():
@@ -90,28 +90,28 @@ class Play(object):
                     self.player.move(2,0)
 
     def update(self):
-        self.player.update()
+        self.player.update(self.main_map.solid_list)
         
         #SIMULATES A CAMERA
         if self.player.rect.x > 500:
-            self.map_1.rect.x -= 2
+            self.main_map.rect.x -= 2
             self.player.rect.x = 500
         elif self.player.rect.x < 140:
-            self.map_1.rect.x += 2
+            self.main_map.rect.x += 2
             self.player.rect.x = 140
 
         if self.player.rect.y < 140:
-            self.map_1.rect.y += 2
+            self.main_map.rect.y += 2
             self.player.rect.y = 140
         elif self.player.rect.y > 340:
-            self.map_1.rect.y -= 2
+            self.main_map.rect.y -= 2
             self.player.rect.y = 340
 
         pygame.display.flip()
 
     def render(self):
         self.game.screen.blit(self.play_surf, (0,0))
-        self.map_1.render_map()
+        self.main_map.render()
         self.player.render()
     def on_enter(self, args):
         pass
