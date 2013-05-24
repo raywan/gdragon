@@ -63,7 +63,7 @@ class Player(Entity):
     def collide(self,solids):
         # http://rene.f0o.com/~rene/stuff/pyzine/html_out/pixel_perfect_collision/index.html
         self.solids = solids
-        collide = pygame.sprite.spritecollide(self, solids, False)
+        collide = pygame.sprite.spritecollide(self, solids, False, pygame.sprite.collide_mask)
         return collide
 
 class Tile(object):

@@ -17,7 +17,7 @@ class MainMap(object):
         for j in range(100):
             self.tile_layer_2.append(0)
         self.tile_layer_2[15] = 2
-        self.tile_layer_2[17] = 2
+        self.tile_layer_2[18] = 2
 
         self.load_tiles()
         self.render_tiles(self.tile_layer_1,(x,y))
