@@ -55,7 +55,7 @@ class Play(object):
 
         self.play_surf = pygame.Surface((800,600), 0, 32)
         self.play_surf.fill((250,250,250))
-        self.main_map = MainMap(self.game, 0,0)
+        self.current_map = self.change_map("main")
         self.player = Player(self.game, (250,250))
 
     def event(self):
@@ -90,33 +90,51 @@ class Play(object):
                     self.player.move(2,0)
 
     def update(self):
-        self.player.update(self.main_map.solid_list)
-        
+        self.player.update(self.current_map.get_solids())
+
         #SIMULATES A CAMERA
         if self.player.rect.x > 500:
-            self.main_map.rect.x -= 2
+            diff = self.player.rect.x - 500
+            self.current_map.rect.x -= diff
             self.player.rect.x = 500
+            for solids in self.current_map.get_solids():
+                solids.rect.x -= diff
+
         elif self.player.rect.x < 140:
-            self.main_map.rect.x += 2
+            diff = 140 - self.player.rect.x
+            self.current_map.rect.x += diff
             self.player.rect.x = 140
+            for solids in self.current_map.get_solids():
+                solids.rect.x += diff
 
         if self.player.rect.y < 140:
-            self.main_map.rect.y += 2
+            diff = 140 - self.player.rect.y
+            self.current_map.rect.y += 2
             self.player.rect.y = 140
+            for solids in self.current_map.get_solids():
+                solids.rect.y += diff
         elif self.player.rect.y > 340:
-            self.main_map.rect.y -= 2
+            diff = self.player.rect.y - 340
+            self.current_map.rect.y -= diff
             self.player.rect.y = 340
+            for solids in self.current_map.get_solids():
+                solids.rect.y -= diff
 
         pygame.display.flip()
 
     def render(self):
         self.game.screen.blit(self.play_surf, (0,0))
-        self.main_map.render()
+        self.current_map.render()
+        self.current_map.get_solids().draw(self.game.screen)
         self.player.render()
     def on_enter(self, args):
         pass
     def on_exit(self):
         pass
+    def change_map(self, m):
+        if m == "main":
+            self.main_map = MainMap(self.game, 0,0)
+            return self.main_map
 
 class Pause(object):
     def __init__(self, parent):

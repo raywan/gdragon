@@ -43,32 +43,34 @@ class Player(Entity):
         self.d_y += y
 
     def update(self, solids):
-        if not self.collide(solids):
-            self.old_x = self.rect.x
-            self.new_x = self.old_x + self.d_x
-            self.rect.x = self.new_x
+        self.old_x = self.rect.x
+        self.new_x = self.old_x + self.d_x
+        self.rect.x = self.new_x
 
-            self.old_y = self.rect.y
-            self.new_y = self.old_y + self.d_y
-            self.rect.y = self.new_y
-        else:
-            print "collid"
+        if self.collide(solids):
+            self.rect.x = self.old_x
+
+        self.old_y = self.rect.y
+        self.new_y = self.old_y + self.d_y
+        self.rect.y = self.new_y
+
+        if self.collide(solids):
+            self.rect.y = self.old_y
 
     def render(self):
         self.game.screen.blit(self.img, self.rect)
 
     def collide(self,solids):
         # http://rene.f0o.com/~rene/stuff/pyzine/html_out/pixel_perfect_collision/index.html
+        self.solids = solids
         collide = pygame.sprite.spritecollide(self, solids, False)
         return collide
 
 class Tile(object):
     def __init__(self):
         self.grass = GrassTile()
-        self.rock = RockTile()
+        # self.rock = RockTile()
         self.null = NullTile()
-    def new_rock(self):
-        return RockTile()
 
 class NullTile(Entity):
     def __init__(self):
@@ -76,6 +78,7 @@ class NullTile(Entity):
         self.spritesheet = SpriteSheet("test_spritesheet.png")
         self.tile = self.spritesheet.load((0,0,32,32),(255,0,255))
         self.mask = pygame.mask.from_surface(self.tile)
+        self.rect = self.tile.get_rect()
 
 class GrassTile(Entity):
     def __init__(self):
@@ -83,18 +86,20 @@ class GrassTile(Entity):
         self.spritesheet = SpriteSheet("test_spritesheet.png")
         self.tile = self.spritesheet.load((64,0,32,32),(255,0,255))
         self.mask = pygame.mask.from_surface(self.tile)
+        self.rect = self.tile.get_rect()
+        # self.rect.x = x
+        # self.rect.y = y
+
         # self.tile = pygame.transform.scale(self.tile, (32 * self.parent.game.SCALE, 32 *
         #     self.parent.game.SCALE))
-    def solid(self):
-        return False
 
 class RockTile(Entity):
-    def __init__(self):
+    def __init__(self, x ,y):
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("test_spritesheet.png")
-        self.tile = self.spritesheet.load((0,32,32,32),(255,0,255))
-        self.mask = pygame.mask.from_surface(self.tile)
-        self.rect = self.tile.get_rect()
-    def solid(self):
-        return True
+        self.image = self.spritesheet.load((0,32,32,32),(255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
