@@ -68,9 +68,18 @@ class Player(Entity):
 
 class Tile(object):
     def __init__(self):
+        self.outer_water = OuterWater()
         self.grass = GrassTile()
         # self.rock = RockTile()
         self.null = NullTile()
+
+class OuterWater(Entity):
+    def __init__(self):
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
+        self.tile = self.spritesheet.load((96,0,32,32),(255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        self.rect = self.tile.get_rect()
 
 class NullTile(Entity):
     def __init__(self):
@@ -85,7 +94,7 @@ class GrassTile(Entity):
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("test_spritesheet.png")
         self.tile = self.spritesheet.load((64,0,32,32),(255,0,255))
-        self.mask = pygame.mask.from_surface(self.tile)
+        self.mask = pygame.mask.from_surface(self.tile) 
         self.rect = self.tile.get_rect()
         # self.rect.x = x
         # self.rect.y = y
@@ -103,3 +112,12 @@ class RockTile(Entity):
         self.rect.x = x
         self.rect.y = y
 
+class BeachEdge(Entity):
+    def __init__(self, x ,y):
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
+        self.image = self.spritesheet.load((64,32,32,32),(255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y

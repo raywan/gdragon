@@ -93,29 +93,33 @@ class Play(object):
         self.player.update(self.current_map.get_solids())
 
         #SIMULATES A CAMERA
+        #checks for x-pos
         if self.player.rect.x > 500:
             diff = self.player.rect.x - 500
             self.current_map.rect.x -= diff
+            self.current_map.outer_water_map_rect.x -= diff
             self.player.rect.x = 500
             for solids in self.current_map.get_solids():
                 solids.rect.x -= diff
-
         elif self.player.rect.x < 140:
             diff = 140 - self.player.rect.x
             self.current_map.rect.x += diff
+            self.current_map.outer_water_map_rect.x += diff
             self.player.rect.x = 140
             for solids in self.current_map.get_solids():
                 solids.rect.x += diff
-
+        #checks for y-pos
         if self.player.rect.y < 140:
             diff = 140 - self.player.rect.y
             self.current_map.rect.y += 2
+            self.current_map.outer_water_map_rect.y += diff
             self.player.rect.y = 140
             for solids in self.current_map.get_solids():
                 solids.rect.y += diff
         elif self.player.rect.y > 340:
             diff = self.player.rect.y - 340
             self.current_map.rect.y -= diff
+            self.current_map.outer_water_map_rect.y -= diff
             self.player.rect.y = 340
             for solids in self.current_map.get_solids():
                 solids.rect.y -= diff
