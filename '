@@ -99,16 +99,14 @@ class Play(object):
         if self.player.rect.x > 500:
             diff = self.player.rect.x - 500
             self.current_map.rect.x -= diff
-            if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.x -= diff
+            self.current_map.outer_water_map_rect.x -= diff
             self.player.rect.x = 500
             for solids in self.current_map.get_solids():
                 solids.rect.x -= diff
         elif self.player.rect.x < 140:
             diff = 140 - self.player.rect.x
             self.current_map.rect.x += diff
-            if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.x += diff
+            self.current_map.outer_water_map_rect.x += diff
             self.player.rect.x = 140
             for solids in self.current_map.get_solids():
                 solids.rect.x += diff
@@ -116,16 +114,14 @@ class Play(object):
         if self.player.rect.y < 140:
             diff = 140 - self.player.rect.y
             self.current_map.rect.y += 2
-            if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.y += diff
+            self.current_map.outer_water_map_rect.y += diff
             self.player.rect.y = 140
             for solids in self.current_map.get_solids():
                 solids.rect.y += diff
         elif self.player.rect.y > 340:
             diff = self.player.rect.y - 340
             self.current_map.rect.y -= diff
-            if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.y -= diff
+            self.current_map.outer_water_map_rect.y -= diff
             self.player.rect.y = 340
             for solids in self.current_map.get_solids():
                 solids.rect.y -= diff
@@ -143,11 +139,11 @@ class Play(object):
         pass
     def change_map(self, m):
         if m == "main":
-            self.main_map = MainMap(self.game)
-            return self.main_map
+            self.current_map = MainMap(self.game)
+            return self.current_map
         if m == "cave":
-            self.cave_map = CaveMap(self.game)
-            return self.cave_map
+            self.current_map = CaveMap(self.game)
+            return self.current_map
 
 class Pause(object):
     def __init__(self, parent):

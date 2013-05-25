@@ -2,7 +2,7 @@ import pygame
 from sprites import *
 
 class MainMap(object):
-    def __init__(self, parent, x, y):
+    def __init__(self, parent):
         self.game = parent
         self.tile = Tile()
         self.solid_list = pygame.sprite.Group()
@@ -38,7 +38,6 @@ class MainMap(object):
         for k in range(10):
             self.map_border.append(4)
 
-        print self.map_border
         self.load_tiles()
 
         #TEMP LAYER RENDERING
@@ -70,7 +69,7 @@ class MainMap(object):
                 y = 32*(tile_row - 1)
                 self.render_solids("beach_edge", x, y)
             else:
-                surf.blit(self.null.tile, (32*(tile_column - 1), 32*(tile_row - 1)))
+                surf.blit(self.null, (32*(tile_column - 1), 32*(tile_row - 1)))
             tile_column += 1
         
             if tile_column > (surf.get_size()[1]//32):
@@ -84,7 +83,7 @@ class MainMap(object):
         if solid == "rock":
             self.rock = RockTile(x,y)
             self.solid_list.add(self.rock)
-        if solid == "beach_edge":
+        elif solid == "beach_edge":
             self.beach_edge = BeachEdge(x,y)
             self.solid_list.add(self.beach_edge)
         else:
@@ -94,3 +93,69 @@ class MainMap(object):
     def render(self):
         self.game.screen.blit(self.outer_water_map, self.outer_water_map_rect) 
         self.game.screen.blit(self.land_map, self.rect)
+
+class CaveMap(object):
+    def __init__(self, parent):
+        self.game = parent
+        self.tile = Tile()
+        self.solid_list = pygame.sprite.Group()
+
+        self.cave_floor_map = pygame.Surface((640,320))
+        self.rect = self.cave_floor_map.get_rect()
+
+        self.tile_array = [
+                "00001111111110000001",
+                "00001111111110000001",
+                "00001111111110000001",
+                "00001111111111111111",
+                "00001111111111111111",
+                "00001111111110000000",
+                "00001111111110000000",
+                "00000001111110000000",
+                "00000001111110000000",
+                "00000001111110000000",]
+        self.load_tiles()
+
+        self.render_tiles(self.cave_floor_map, self.tile_array)
+
+    def load_tiles(self):
+        self.cave_floor = self.tile.cave_floor.tile
+        self.null = self.tile.null.tile 
+    def render_tiles(self, surf, tile_array):
+        tile_column = 1
+        tile_row = 1
+
+        for row in tile_array:
+            for col in row:
+                if col == '0':
+                    None
+                elif col == '1':
+                    surf.blit(self.cave_floor, (32*(tile_column - 1), 32*(tile_row - 1)))
+                elif col == '4':
+                    x = 32*(tile_column - 1)
+                    y = 32*(tile_row - 1)
+                    self.render_solids("beach_edge", x, y)
+                else:
+                    surf.blit(self.null, (32*(tile_column - 1), 32*(tile_row - 1)))
+                tile_column += 1
+        
+            if tile_column > (surf.get_size()[1]//32):
+                tile_column = 1
+                tile_row += 1
+        
+        # TESTING SCALING
+        # self.map_surf = pygame.transform.scale(self.map_surf, (self.map_surf.get_size()[0] *
+        #     self.game.SCALE, self.map_surf.get_size()[1] * self.game.SCALE))
+    def render_solids(self, solid, x, y):
+        if solid == "rock":
+            self.rock = RockTile(x,y)
+            self.solid_list.add(self.rock)
+        elif solid == "beach_edge":
+            self.beach_edge = BeachEdge(x,y)
+            self.solid_list.add(self.beach_edge)
+        else:
+            print "None" 
+    def get_solids(self):
+        return self.solid_list
+    def render(self):
+        self.game.screen.blit(self.cave_floor_map, self.rect)

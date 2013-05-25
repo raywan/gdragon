@@ -70,7 +70,7 @@ class Tile(object):
     def __init__(self):
         self.outer_water = OuterWater()
         self.grass = GrassTile()
-        # self.rock = RockTile()
+        self.cave_floor = CaveFloor()
         self.null = NullTile()
 
 class OuterWater(Entity):
@@ -121,3 +121,12 @@ class BeachEdge(Entity):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+class CaveFloor(Entity):
+    def __init__(self):
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
+        self.tile = self.spritesheet.load((96,32,32,32),(255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        self.rect = self.tile.get_rect()
+
