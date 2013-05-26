@@ -27,7 +27,7 @@ class Player(Entity):
     d_x = 0
     d_y = 0
     def __init__(self, parent, init_pos):
-        self.game = parent
+        self.parent = parent
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("test_spritesheet.png")
         self.img = self.spritesheet.load((32,0,32,32),(255,0,255))
@@ -42,10 +42,16 @@ class Player(Entity):
         self.d_x += x
         self.d_y += y
 
-    def update(self, solids):
+    def update(self, solids, entrance):
         self.old_x = self.rect.x
         self.new_x = self.old_x + self.d_x
         self.rect.x = self.new_x
+        
+        if self.collide_entrance(entrance):
+            self.parent.current_map = self.parent.change_map("cave")
+            self.rect.x = 0
+            self.rect.y = 0
+
 
         if self.collide(solids):
             self.rect.x = self.old_x
@@ -58,13 +64,17 @@ class Player(Entity):
             self.rect.y = self.old_y
 
     def render(self):
-        self.game.screen.blit(self.img, self.rect)
+        self.parent.game.screen.blit(self.img, self.rect)
 
     def collide(self,solids):
         # http://rene.f0o.com/~rene/stuff/pyzine/html_out/pixel_perfect_collision/index.html
-        self.solids = solids
         collide = pygame.sprite.spritecollide(self, solids, False, pygame.sprite.collide_mask)
         return collide
+
+    def collide_entrance(self, entrance):
+        entrance_collide = pygame.sprite.spritecollide(self, entrance, False,
+                pygame.sprite.collide_mask)
+        return entrance_collide
 
 class Tile(object):
     def __init__(self):
@@ -121,7 +131,15 @@ class BeachEdge(Entity):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-
+class CaveEntrance(Entity):
+    def __init__(self, x, y):
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("test_spritesheet.png")
+        self.image = self.spritesheet.load((0,64,32,32),(255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 class CaveFloor(Entity):
     def __init__(self):
         Entity.__init__(self)

@@ -56,7 +56,7 @@ class Play(object):
         self.play_surf = pygame.Surface((800,600), 0, 32)
         self.play_surf.fill((250,250,250))
         self.current_map = self.change_map("main")
-        self.player = Player(self.game, (250,250))
+        self.player = Player(self, (250,250))
 
     def event(self):
         for event in pygame.event.get():
@@ -72,6 +72,8 @@ class Play(object):
                     sys.exit()
                 elif event.key == K_c:
                     self.current_map = self.change_map("cave")
+                elif event.key == K_v:
+                    self.current_map = self.change_map("main")
                 ##############
                 elif event.key == K_DOWN:
                     self.player.move(0,2)
@@ -92,7 +94,7 @@ class Play(object):
                     self.player.move(2,0)
 
     def update(self):
-        self.player.update(self.current_map.get_solids())
+        self.player.update(self.current_map.get_solids(), self.current_map.get_enterable())
 
         #SIMULATES A CAMERA
         #checks for x-pos
@@ -102,7 +104,7 @@ class Play(object):
             if self.current_map == self.main_map:
                 self.current_map.outer_water_map_rect.x -= diff
             self.player.rect.x = 500
-            for solids in self.current_map.get_solids():
+            for solids in self.current_map.get_all_sprites():
                 solids.rect.x -= diff
         elif self.player.rect.x < 140:
             diff = 140 - self.player.rect.x
@@ -110,7 +112,7 @@ class Play(object):
             if self.current_map == self.main_map:
                 self.current_map.outer_water_map_rect.x += diff
             self.player.rect.x = 140
-            for solids in self.current_map.get_solids():
+            for solids in self.current_map.get_all_sprites():
                 solids.rect.x += diff
         #checks for y-pos
         if self.player.rect.y < 140:
@@ -119,7 +121,7 @@ class Play(object):
             if self.current_map == self.main_map:
                 self.current_map.outer_water_map_rect.y += diff
             self.player.rect.y = 140
-            for solids in self.current_map.get_solids():
+            for solids in self.current_map.get_all_sprites():
                 solids.rect.y += diff
         elif self.player.rect.y > 340:
             diff = self.player.rect.y - 340
@@ -127,7 +129,7 @@ class Play(object):
             if self.current_map == self.main_map:
                 self.current_map.outer_water_map_rect.y -= diff
             self.player.rect.y = 340
-            for solids in self.current_map.get_solids():
+            for solids in self.current_map.get_all_sprites():
                 solids.rect.y -= diff
 
         pygame.display.flip()
@@ -135,7 +137,9 @@ class Play(object):
     def render(self):
         self.game.screen.blit(self.play_surf, (0,0))
         self.current_map.render()
-        self.current_map.get_solids().draw(self.game.screen)
+        self.current_map.get_all_sprites().draw(self.game.screen)
+        # self.current_map.get_solids().draw(self.game.screen)
+        # self.current_map.get_enterables().draw(self.game.screen)
         self.player.render()
     def on_enter(self, args):
         pass
