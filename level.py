@@ -128,6 +128,8 @@ class MainMap(object):
         return self.solid_list
     def get_enterable(self):
         return self.entrance_list
+    def hostile(self):
+        return False
     def render(self):
         self.game.screen.blit(self.outer_water_map, self.outer_water_map_rect) 
         self.game.screen.blit(self.land_map, self.rect)
@@ -147,13 +149,13 @@ class CaveMap(object):
                 "00001111111110000001",
                 "00001111111110000001",
                 "00001111111110000001",
-                "11111111111111111111",
-                "11111111111111111111",
-                "11111111111110000000",
+                "00001111111111111111",
+                "00001111111111111111",
+                "00001111111110000000",
                 "00001111111110000000",
                 "00000001111110000000",
                 "00000001111110000000",
-                "00000001111110000000",]
+                "11111111111111111111",]
         self.load_tiles()
 
         self.render_tiles(self.cave_floor_map, self.tile_array)
@@ -201,5 +203,7 @@ class CaveMap(object):
         return self.solid_list
     def get_enterable(self):
         return self.entrance_list
+    def hostile(self):
+        return True
     def render(self):
         self.game.screen.blit(self.cave_floor_map, self.rect)

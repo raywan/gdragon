@@ -1,4 +1,5 @@
 import sys
+import random
 import pygame
 from sprites import *
 from level import *
@@ -132,14 +133,25 @@ class Play(object):
             for solids in self.current_map.get_all_sprites():
                 solids.rect.y -= diff
 
+        #Checks if the map is hotile and does RNG if the player is moving
+        if self.current_map.hostile():
+            if self.player.is_moving():
+                if self.generate_enemies() == 666:
+                    try:
+                        self.game.game_state.change("battle", None)
+                    except KeyError:
+                        self.game.game_state.add("battle", Battle(self))
+                        self.game.game_state.change("battle", None)
+                    self.player.d_x = 0
+                    self.player.d_y = 0
+            
+
         pygame.display.flip()
 
     def render(self):
         self.game.screen.blit(self.play_surf, (0,0))
         self.current_map.render()
         self.current_map.get_all_sprites().draw(self.game.screen)
-        # self.current_map.get_solids().draw(self.game.screen)
-        # self.current_map.get_enterables().draw(self.game.screen)
         self.player.render()
     def on_enter(self, args):
         pass
@@ -152,6 +164,36 @@ class Play(object):
         if m == "cave":
             self.cave_map = CaveMap(self.game)
             return self.cave_map
+    def generate_enemies(self):
+        return random.randint(1, 1000)
+
+class Battle(object):
+    def __init__(self, parent):
+        self.parent = parent
+        self.surface = pygame.Surface((640,480))
+        self.surface.fill((0,0,250))
+    def event(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == K_e:
+                    self.parent.game.game_state.change("play", None)
+                #DEBUG########
+                elif event.key == K_q:
+                    pygame.quit()
+                    sys.exit()
+                ##############
+
+    def update(self):
+        pygame.display.flip()
+    def render(self):
+        self.parent.game.screen.blit(self.surface, (0,0))
+    def on_enter(self, args):
+        pass
+    def on_exit(self):
+        self.parent.game.game_state.pop("battle")
 
 class Pause(object):
     def __init__(self, parent):

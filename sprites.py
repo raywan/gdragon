@@ -49,9 +49,6 @@ class Player(Entity):
         
         if self.collide_entrance(entrance):
             self.parent.current_map = self.parent.change_map("cave")
-            self.rect.x = 0
-            self.rect.y = 0
-
 
         if self.collide(solids):
             self.rect.x = self.old_x
@@ -75,6 +72,11 @@ class Player(Entity):
         entrance_collide = pygame.sprite.spritecollide(self, entrance, False,
                 pygame.sprite.collide_mask)
         return entrance_collide
+    def is_moving(self):
+        if self.d_x != 0 or self.d_y != 0:
+            return True
+        else:
+            return False
 
 class Tile(object):
     def __init__(self):
