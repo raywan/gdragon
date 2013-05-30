@@ -448,7 +448,171 @@ class 1x1Box (Entity) :
         slef.rect = self.tile.get_rect()
 
 #############################################################################
+# from Big Tree.png
+        #top row
+class BigTreeTopLeft (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((0,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeTopLeftMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((32,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeTopRightMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((64,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeTopRight (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((96,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
         
+        #upper middle row
+class BigTreeUpMiddleLeft (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((0,32,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeUpMiddleLeftMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((32,32,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeUpMiddleRightMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((64,32,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeUpMiddleRight (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((96,32,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+        #lower middle row
+class BigTreeDownMiddleLeft (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((0,64,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeDownMiddleLeftMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((32,64,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeDownMiddleRightMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((64,64,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeDownMiddleRight (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((96,64,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+        #bottom row
+class BigTreeBottomLeft (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((0,96,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeBottomLeftMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((32,96,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeBottomRightMiddle (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((64,96,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BigTreeBottomRight (Entity) :
+    def __init__(self) :
+        Entity.__init__(self)
+        self.spritesheet = Spritesheet("Big Tree.png")
+        self.tile = self.Spritesheet.load((96,96,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        slef.rect = self.tile.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
 
 
 
