@@ -111,7 +111,6 @@ class Tile(object) :
         self.cliff_dark_grass_bottom_row_middle = CliffDarkGrassBottomRowMiddle()
         self.cliff_dark_grass_bottom_row_right = CliffDarkGrassBottomRowRight()
         ###
-        self.one_by_one = 1x1Box()
         
 #########################################################################
 #from file Grass2.png
@@ -176,7 +175,7 @@ class CliffGrassRightCenter (Entity) :
 
         #bottom row
 class CliffSideSmallLeft (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((0,64,32,32), (255,0,255))
@@ -186,7 +185,7 @@ class CliffSideSmallLeft (Entity) :
         self.rect.y = y
 
 class CliffSideSmallCenter (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((32,64,32,32), (255,0,255))
@@ -196,7 +195,7 @@ class CliffSideSmallCenter (Entity) :
         self.rect.y = y
         
 class CliffSideSmallRight (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((64,64,32,32), (255,0,255))
@@ -209,7 +208,7 @@ class CliffSideSmallRight (Entity) :
 #from Cliff.png, second 96x96 square
         #top row
 class CliffSideLargeLeftTop (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((96,0,32,32), (255,0,255))
@@ -219,7 +218,7 @@ class CliffSideLargeLeftTop (Entity) :
         self.rect.y = y
 
 class CliffSideLargeMiddleTop (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((128,0,32,32), (255,0,255))
@@ -229,7 +228,7 @@ class CliffSideLargeMiddleTop (Entity) :
         self.rect.y = y
 
 class CliffSideLargeRightTop (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((160,0,32,32), (255,0,255))
@@ -240,7 +239,7 @@ class CliffSideLargeRightTop (Entity) :
 
         #middle row
 class CliffSideLargeLeftCenter (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((96,32,32,32), (255,0,255))
@@ -250,7 +249,7 @@ class CliffSideLargeLeftCenter (Entity) :
         self.rect.y = y
 
 class CliffSideLargeMiddleCenter (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((128,32,32,32), (255,0,255))
@@ -260,7 +259,7 @@ class CliffSideLargeMiddleCenter (Entity) :
         self.rect.y = y
 
 class CliffSideLargeRightCenter (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((160,32,32,32), (255,0,255))
@@ -271,7 +270,7 @@ class CliffSideLargeRightCenter (Entity) :
 
         #bottow row
 class CliffSideLargeLeftBottom (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((96,64,32,32), (255,0,255))
@@ -281,7 +280,7 @@ class CliffSideLargeLeftBottom (Entity) :
         self.rect.y = y
 
 class CliffSideLargeMiddleBottom (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((128,64,32,32), (255,0,255))
@@ -291,7 +290,7 @@ class CliffSideLargeMiddleBottom (Entity) :
         self.rect.y = y
 
 class CliffSideLargeRightBottom (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("CliffGrass.png")
         self.tile = self.Spritesheet.load((160,64,32,32), (255,0,255))
@@ -451,7 +450,7 @@ class 1x1Box (Entity) :
 # from Big Tree.png
         #top row
 class BigTreeTopLeft (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((0,0,32,32), (255,0,255))
@@ -461,7 +460,7 @@ class BigTreeTopLeft (Entity) :
         self.rect.y = y
 
 class BigTreeTopLeftMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((32,0,32,32), (255,0,255))
@@ -471,7 +470,7 @@ class BigTreeTopLeftMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeTopRightMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((64,0,32,32), (255,0,255))
@@ -481,7 +480,7 @@ class BigTreeTopRightMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeTopRight (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((96,0,32,32), (255,0,255))
@@ -492,7 +491,7 @@ class BigTreeTopRight (Entity) :
         
         #upper middle row
 class BigTreeUpMiddleLeft (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((0,32,32,32), (255,0,255))
@@ -502,7 +501,7 @@ class BigTreeUpMiddleLeft (Entity) :
         self.rect.y = y
 
 class BigTreeUpMiddleLeftMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((32,32,32,32), (255,0,255))
@@ -512,7 +511,7 @@ class BigTreeUpMiddleLeftMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeUpMiddleRightMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((64,32,32,32), (255,0,255))
@@ -522,7 +521,7 @@ class BigTreeUpMiddleRightMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeUpMiddleRight (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((96,32,32,32), (255,0,255))
@@ -533,7 +532,7 @@ class BigTreeUpMiddleRight (Entity) :
 
         #lower middle row
 class BigTreeDownMiddleLeft (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((0,64,32,32), (255,0,255))
@@ -543,7 +542,7 @@ class BigTreeDownMiddleLeft (Entity) :
         self.rect.y = y
 
 class BigTreeDownMiddleLeftMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((32,64,32,32), (255,0,255))
@@ -553,7 +552,7 @@ class BigTreeDownMiddleLeftMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeDownMiddleRightMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((64,64,32,32), (255,0,255))
@@ -563,7 +562,7 @@ class BigTreeDownMiddleRightMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeDownMiddleRight (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((96,64,32,32), (255,0,255))
@@ -574,7 +573,7 @@ class BigTreeDownMiddleRight (Entity) :
 
         #bottom row
 class BigTreeBottomLeft (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((0,96,32,32), (255,0,255))
@@ -584,7 +583,7 @@ class BigTreeBottomLeft (Entity) :
         self.rect.y = y
 
 class BigTreeBottomLeftMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((32,96,32,32), (255,0,255))
@@ -594,7 +593,7 @@ class BigTreeBottomLeftMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeBottomRightMiddle (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((64,96,32,32), (255,0,255))
@@ -604,7 +603,7 @@ class BigTreeBottomRightMiddle (Entity) :
         self.rect.y = y
 
 class BigTreeBottomRight (Entity) :
-    def __init__(self) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = Spritesheet("Big Tree.png")
         self.tile = self.Spritesheet.load((96,96,32,32), (255,0,255))
