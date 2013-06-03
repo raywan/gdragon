@@ -108,8 +108,8 @@ class GrassTile(Entity):
         self.tile = self.spritesheet.load((64,0,32,32),(255,0,255))
         self.mask = pygame.mask.from_surface(self.tile) 
         self.rect = self.tile.get_rect()
-        # self.rect.x = x
-        # self.rect.y = y
+        self.rect.x = x
+        self.rect.y = y
 
         # self.tile = pygame.transform.scale(self.tile, (32 * self.parent.game.SCALE, 32 *
         #     self.parent.game.SCALE))
