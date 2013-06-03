@@ -103,7 +103,8 @@ class Play(object):
             diff = self.player.rect.x - 500
             self.current_map.rect.x -= diff
             if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.x -= diff
+                # self.current_map.outer_water_map_rect.x -= diff
+                pass
             self.player.rect.x = 500
             for solids in self.current_map.get_all_sprites():
                 solids.rect.x -= diff
@@ -111,7 +112,8 @@ class Play(object):
             diff = 140 - self.player.rect.x
             self.current_map.rect.x += diff
             if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.x += diff
+                # self.current_map.outer_water_map_rect.x += diff
+                pass
             self.player.rect.x = 140
             for solids in self.current_map.get_all_sprites():
                 solids.rect.x += diff
@@ -120,7 +122,8 @@ class Play(object):
             diff = 140 - self.player.rect.y
             self.current_map.rect.y += 2
             if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.y += diff
+                # self.current_map.outer_water_map_rect.y += diff
+                pass
             self.player.rect.y = 140
             for solids in self.current_map.get_all_sprites():
                 solids.rect.y += diff
@@ -128,7 +131,8 @@ class Play(object):
             diff = self.player.rect.y - 340
             self.current_map.rect.y -= diff
             if self.current_map == self.main_map:
-                self.current_map.outer_water_map_rect.y -= diff
+                # self.current_map.outer_water_map_rect.y -= diff
+                pass
             self.player.rect.y = 340
             for solids in self.current_map.get_all_sprites():
                 solids.rect.y -= diff

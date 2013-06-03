@@ -9,38 +9,32 @@ class MainMap(object):
         self.solid_list = pygame.sprite.Group()
         self.entrance_list = pygame.sprite.Group()
 
-        #ocean layer
-        self.outer_water_map = pygame.Surface((1024,1024))
-        self.outer_water_map_rect = self.outer_water_map.get_rect()
-        self.outer_water_map_rect.x = -208
-        self.outer_water_map_rect.y = -208
-
         #main land layer
         self.land_map = pygame.Surface((320,320))
         self.rect = self.land_map.get_rect()
 
         #DEBUG TILE ARRAYS
-        self.outer_water_layer = []
+        self.land_layer = []
         for w in range(32):
-            self.outer_water_layer.append("1"*32)
+            self.land_layer.append("1"*32)
 
         self.tile_layer_1 = [
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222",
-                "2222222222"]
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111",
+                "1111111111"]
 
         self.tile_layer_2 = [
-                "0000000000",
-                "0000003030",
-                "0000000000",
-                "0005000000",
+                "2333333334",
+                "5111111116",
+                "5111111116",
+                "abbbbbbbbc",
                 "0000000000",
                 "0000000000",
                 "0000000000",
@@ -63,14 +57,18 @@ class MainMap(object):
         self.load_tiles()
 
         #TEMP LAYER RENDERING
-        self.render_tiles(self.outer_water_map, self.outer_water_layer)
+        self.render_tiles(self.land_map, self.land_layer)
         self.render_tiles(self.land_map, self.tile_layer_1)
         self.render_tiles(self.land_map, self.tile_layer_2)
-        self.render_tiles(self.land_map, self.map_border)
+##        self.render_tiles(self.land_map, self.map_border)
 
     def load_tiles(self):
-        self.grass = self.tile.grass.tile
-        self.outer_water = self.tile.outer_water.tile
+        self.main_grass = self.tile.main_grass.tile
+        self.cliff_grass_top_left = self.tile.cliff_grass_top_left.tile
+        self.cliff_grass_middle_top = self.tile.cliff_grass_middle_top.tile
+        self.cliff_grass_right_top = self.tile.cliff_grass_right_top.tile
+        self.cliff_grass_left_center = self.tile.cliff_grass_left_center.tile
+        self.cliff_grass_right_center = self.tile.cliff_grass_right_center.tile
         self.null = self.tile.null.tile 
     def render_tiles(self, surf, tile_array):
         tile_column = 1
@@ -80,21 +78,29 @@ class MainMap(object):
                 if col == '0':
                     None
                 elif col == '1':
-                    surf.blit(self.outer_water, (32*(tile_column - 1), 32*(tile_row - 1)))
+                    surf.blit(self.main_grass, (32*(tile_column - 1), 32*(tile_row - 1)))
                 elif col == '2':
-                    surf.blit(self.grass, (32*(tile_column - 1), 32*(tile_row - 1)))
+                    surf.blit(self.cliff_grass_top_left, (32*(tile_column - 1), 32*(tile_row - 1)))
                 elif col == '3':
-                    x = 32*(tile_column - 1)
-                    y = 32*(tile_row - 1)
-                    self.render_solids("rock", x, y)
+                    surf.blit(self.cliff_grass_middle_top, (32*(tile_column - 1), 32*(tile_row - 1)))
                 elif col == '4':
-                    x = 32*(tile_column - 1)
-                    y = 32*(tile_row - 1)
-                    self.render_solids("beach_edge", x, y)
+                    surf.blit(self.cliff_grass_right_top, (32*(tile_column - 1), 32*(tile_row - 1)))
                 elif col == '5':
+                    surf.blit(self.cliff_grass_left_center, (32*(tile_column - 1), 32*(tile_row - 1)))
+                elif col == '6':
+                    surf.blit(self.cliff_grass_right_center, (32*(tile_column - 1), 32*(tile_row - 1)))
+                elif col == 'a':
                     x = 32*(tile_column - 1)
                     y = 32*(tile_row - 1)
-                    self.render_enterable("cave_entrance", x, y)
+                    self.render_solids("SmallCliffLeft", x, y)
+                elif col == 'b':
+                    x = 32*(tile_column - 1)
+                    y = 32*(tile_row - 1)
+                    self.render_solids("SmallCliffRight", x, y)
+                elif col == 'c':
+                    x = 32*(tile_column - 1)
+                    y = 32*(tile_row - 1)
+                    self.render_solids("SmallCliffCenter", x, y)
                 else:
                     surf.blit(self.null, (32*(tile_column - 1), 32*(tile_row - 1)))
                 tile_column += 1
@@ -107,14 +113,18 @@ class MainMap(object):
         # self.map_surf = pygame.transform.scale(self.map_surf, (self.map_surf.get_size()[0] *
         #     self.game.SCALE, self.map_surf.get_size()[1] * self.game.SCALE))
     def render_solids(self, solid, x, y):
-        if solid == "rock":
-            self.rock = RockTile(x,y)
-            self.all_sprites.add(self.rock)
-            self.solid_list.add(self.rock)
-        elif solid == "beach_edge":
-            self.beach_edge = BeachEdge(x,y)
-            self.all_sprites.add(self.beach_edge)
-            self.solid_list.add(self.beach_edge)
+        if solid == "SmallCliffLeft":
+            self.cliff_side_small_left = CliffSideSmallLeft(x,y)
+            self.all_sprites.add(self.cliff_side_small_left)
+            self.solid_list.add(self.cliff_side_small_left)
+        elif solid == "SmallCliffRight":
+            self.cliff_side_small_right = CliffSideSmallRight(x,y)
+            self.all_sprites.add(self.cliff_side_small_right)
+            self.solid_list.add(self.cliff_side_small_right)
+        elif solid == "SmallCliffCenter":
+            self.cliff_side_small_center = CliffSideSmallCenter(x,y)
+            self.all_sprites.add(self.cliff_side_small_center)
+            self.solid_list.add(self.cliff_side_small_center)
         else:
             print "None" 
     def render_enterable(self, enterable, x, y):
@@ -130,8 +140,7 @@ class MainMap(object):
         return self.entrance_list
     def hostile(self):
         return False
-    def render(self):
-        self.game.screen.blit(self.outer_water_map, self.outer_water_map_rect) 
+    def render(self): 
         self.game.screen.blit(self.land_map, self.rect)
 
 class CaveMap(object):
