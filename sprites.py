@@ -83,6 +83,7 @@ class Tile(object) :
         self.outer_water = OuterWater()
         self.main_grass = MainGrass()
         self.grass_weed = GrassWeed()
+        self.cave_floor = CaveFloor()
         ###
         self.cliff_grass_top_left = cliff_grassTopLeft()
         self.cliff_grass_middle_top = cliff_grassMiddleTop()
@@ -144,6 +145,14 @@ class GrassWeed (Entity) :
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("res/grass2.png")
         self.tile = self.spritesheet.load((160,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.tile)
+        self.rect = self.tile.get_rect()
+
+class CaveFloor (Entity) :
+    def __init__(self):
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("res/grass2.png")
+        self.tile = self.spritesheet.load((128,0,32,32), (255,0,255))
         self.mask = pygame.mask.from_surface(self.tile)
         self.rect = self.tile.get_rect()
  #########################################################################       
@@ -455,13 +464,45 @@ class CliffDarkGrassBottomRowRight (Entity) :
 #############################################################################
 
 #1x1 box for colliding
-class OneByOneBox(Entity) :
-    def __init__(self) :
+class Top(Entity) :
+    def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("res/1x1pixelbox.png")
-        self.tile = self.spritesheet.load((0,0,1,1), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.tile)
-        self.rect = self.tile.get_rect()
+        self.image = self.spritesheet.load((0,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class Bottom(Entity) :
+    def __init__(self, x, y) :
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("res/1x1pixelbox.png")
+        self.image = self.spritesheet.load((0,32,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        
+class Left(Entity) :
+    def __init__(self, x, y) :
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("res/1x1pixelbox.png")
+        self.image = self.spritesheet.load((32,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class Right(Entity) :
+    def __init__(self, x, y) :
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("res/1x1pixelbox.png")
+        self.image = self.spritesheet.load((32,32,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 #############################################################################
 # from res/big_tree.png
@@ -469,7 +510,7 @@ class OneByOneBox(Entity) :
 class BigTreeTopLeft (Entity) :
     def __init__(self, x, y) :
         Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/res/big_tree.png")
+        self.spritesheet = SpriteSheet("res/big_tree.png")
         self.image = self.spritesheet.load((0,0,32,32), (255,0,255))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
@@ -629,6 +670,31 @@ class BigTreeBottomRight (Entity) :
         self.rect.x = x
         self.rect.y = y
 
+###################################################################
+    #from CaveEntrance.png
+
+class CaveEntrance (Entity) :
+    def __init__(self, x, y) :
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("res/CaveEntrance.png")
+        self.image = self.spritesheet.load((0,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+###################################################################
+    #from CaveWalls.png
+
+class CaveWalls (Entity) :
+    def __init__(self, x, y) :
+        Entity.__init__(self)
+        self.spritesheet = SpriteSheet("res/CaveWalls.png")
+        self.image = self.spritesheet.load((0,0,32,32), (255,0,255))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 
 
