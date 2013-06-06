@@ -208,7 +208,7 @@ class CaveMap(object):
                 "22221111111112222222",
                 "22222221111112222222",
                 "22222221111112222222",
-                "11111111111111111111",]
+                "11111111111111111111"]
         self.tile_array_1 = [
                 "dddddddddddddddddddd",
                 "00000000000000000000",
@@ -219,18 +219,18 @@ class CaveMap(object):
                 "00000000000000000000",
                 "00000000000000000000",
                 "00000000000000000000",
-                "bbbbbbbbbbbbbbbbbbbb",]
+                "bbbbbbbbbbbbbbbbbbbb"]
         self.tile_array_2 = [
+                "c0000000000000c000aa",
+                "c000000000000000000a",
+                "c0000000000000c000aa",
                 "c000000000000000000a",
                 "c000000000000000000a",
                 "c000000000000000000a",
                 "c000000000000000000a",
                 "c000000000000000000a",
                 "c000000000000000000a",
-                "c000000000000000000a",
-                "c000000000000000000a",
-                "c000000000000000000a",
-                "c000000000000000000a",]
+                "c000000000000000000a"]
         self.load_tiles()
 
         self.render_tiles(self.cave_floor_map, self.tile_array)
@@ -285,23 +285,27 @@ class CaveMap(object):
     def render_solids(self, solid, x, y):
         if solid == "rock":
             self.rock = RockTile(x,y)
+            self.all_sprites.add(self.rock)
             self.solid_list.add(self.rock)
         elif solid == "CaveWalls":
             self.cave_walls = CaveWalls(x,y)
+            self.all_sprites.add(self.cave_walls)
             self.solid_list.add(self.cave_walls)
         elif solid == "LeftBorder":
             self.left = Left(x,y)
-            
+            self.all_sprites.add(self.left)
             self.solid_list.add(self.left)
         elif solid == "RightBorder":
             self.right = Right(x,y)
+            self.all_sprites.add(self.right)
             self.solid_list.add(self.right)
         elif solid == "BottomBorder":
             self.bottom = Bottom(x,y)
-        
+            self.all_sprites.add(self.bottom)
             self.solid_list.add(self.bottom)
         elif solid == "TopBorder":
             self.top = Top(x,y)
+            self.all_sprites.add(self.top)
             self.solid_list.add(self.top)
         else:
             print "None" 
