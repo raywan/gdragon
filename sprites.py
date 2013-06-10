@@ -803,15 +803,6 @@ class FoodStandEight (Entity) :
         self.rect.x = x
         self.rect.y = y
 
-class FoodStandBottomTwo (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/FoodStands.png")
-        self.image = self.spritesheet.load((0,96,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
 ##############################################################################
         
 class TentFoodStandOne (Entity) :
@@ -934,38 +925,8 @@ class LargeTableSix (Entity) :
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-###################
-class LargeTableSeven (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/LargeTable.png")
-        self.image = self.spritesheet.load((0,64,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class LargeTableEight (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/LargeTable.png")
-        self.image = self.spritesheet.load((32,64,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class LargeTableNine (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/LargeTable.png")
-        self.image = self.spritesheet.load((64,64,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
 ##################
-class LargeTableTen (Entity) :
+class LargeTableSeven (Entity) :
     def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("res/LargeTable.png")
@@ -975,7 +936,7 @@ class LargeTableTen (Entity) :
         self.rect.x = x
         self.rect.y = y
 
-class LargeTableEleven (Entity) :
+class LargeTableEight (Entity) :
     def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("res/LargeTable.png")
@@ -985,7 +946,7 @@ class LargeTableEleven (Entity) :
         self.rect.x = x
         self.rect.y = y
 
-class LargeTableTwelve (Entity) :
+class LargeTableNine (Entity) :
     def __init__(self, x, y) :
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("res/LargeTable.png")
@@ -1052,87 +1013,6 @@ class LargeLogsFour (Entity) :
         Entity.__init__(self)
         self.spritesheet = SpriteSheet("res/LargeLogs.png")
         self.image = self.spritesheet.load((32,32,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-###################################################################
-
-class RandomBoatOne (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((0,0,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class RandomBoatTwo (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((32,0,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class RandomBoatThree (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((64,0,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class RandomBoatFour (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((96,0,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-#######################
-class RandomBoatFive (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((0,32,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class RandomBoatSix (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((32,32,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class RandomBoatSeven (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((64,32,32,32), (255,0,255))
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-class RandomBoatEight (Entity) :
-    def __init__(self, x, y) :
-        Entity.__init__(self)
-        self.spritesheet = SpriteSheet("res/RandomBoat.png")
-        self.image = self.spritesheet.load((96,32,32,32), (255,0,255))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = x

@@ -7,6 +7,9 @@ from pygame.locals import *
 
 #To be interfaced from
 class EmptyState(object):
+    """
+    DESCRIPTION: This is simply a class to be interfaced from (hypothetically speaking)
+    """
     def __init__(self, parent):
         pass
     def update(self):
@@ -20,10 +23,24 @@ class EmptyState(object):
 
 class MainMenu(object):
     def __init__(self, parent):
+        """
+        FCN NAME: __init__
+        DESCRIPTION: Runs the events in the current state
+        INPUTS: None
+        OUTPUTS: None
+        ALGORITHMS: None
+        """
         self.game = parent
 
         self.main_surf = pygame.Surface((800,600), 0, 32)
     def event(self):
+        """
+        FCN NAME: event
+        DESCRIPTION: Runs the events in the current state
+        INPUTS: None
+        OUTPUTS: None
+        ALGORITHMS: None
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -42,12 +59,40 @@ class MainMenu(object):
                     sys.exit()
                 ##############
     def update(self):
+        """
+        FCN NAME: update
+        DESCRIPTION: Runs the events in the current state
+        INPUTS: None
+        OUTPUTS: None
+        ALGORITHMS: None
+        """
         pygame.display.flip()
     def render(self):
+        """
+        FCN NAME: render
+        DESCRIPTION: Runs the events in the current state
+        INPUTS: None
+        OUTPUTS: None
+        ALGORITHMS: None
+        """
         self.game.screen.blit(self.main_surf, (0,0))
     def on_enter(self, args):
+        """
+        FCN NAME: on_enter
+        DESCRIPTION: Runs the events in the current state
+        INPUTS: None
+        OUTPUTS: None
+        ALGORITHMS: None
+        """
         pass
     def on_exit(self):
+        """
+        FCN NAME: on_exit
+        DESCRIPTION: Runs the events in the current state
+        INPUTS: None
+        OUTPUTS: None
+        ALGORITHMS: None
+        """
         pass
 
 class Play(object):
